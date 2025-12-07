@@ -2,6 +2,8 @@ export enum Inputs {
   Path = "path",
   Key = "key",
   RestoreKeys = "restore-keys",
+  LookupOnly = "lookup-only",
+  FailOnCacheMiss = "fail-on-cache-miss",
   BucketName = "bucket-name",
   AWSRegion = "aws-region",
   AWSAccessKeyId = "aws-access-key-id",
@@ -23,5 +25,5 @@ export enum Outputs {
 export enum State {
   CachePath = "CACHE_PATH",
   CacheKey = "CACHE_KEY",
-  CacheMatchedKey = "CACHE_MATCHED_KEY",
+  CacheHit = "CACHE_HIT",
 }

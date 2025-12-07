@@ -13,7 +13,7 @@ beforeEach(() => {
   clearInputs();
   delete process.env.STATE_CACHE_PATH;
   delete process.env.STATE_CACHE_KEY;
-  delete process.env.STATE_CACHE_MATCHED_KEY;
+  delete process.env.STATE_CACHE_HIT;
   process.env.GITHUB_STATE = createEmptyFile();
   process.env.GITHUB_OUTPUT = createEmptyFile();
   s3Mock.callsFake((input) => {
@@ -44,6 +44,8 @@ function clearInputs(): void {
   delete process.env["INPUT_PATH"];
   delete process.env["INPUT_KEY"];
   delete process.env["INPUT_RESTORE-KEYS"];
+  delete process.env["INPUT_LOOKUP-ONLY"];
+  delete process.env["INPUT_FAIL-ON-CACHE-MISS"];
   delete process.env["INPUT_BUCKET-NAME"];
 }
 
@@ -51,6 +53,8 @@ export function setupInputs({
   path = "",
   key = "",
   restoreKeys = [],
+  lookupOnly = false,
+  failOnCacheMiss = false,
   bucketName = "test-bucket-name",
   awsRegion = "ap-northeast-1",
   awsAccessKeyId = "",
@@ -60,6 +64,8 @@ export function setupInputs({
   path?: string;
   key?: string;
   restoreKeys?: string[];
+  lookupOnly?: boolean;
+  failOnCacheMiss?: boolean;
   bucketName?: string;
   awsRegion?: string;
   awsAccessKeyId?: string;
@@ -69,6 +75,8 @@ export function setupInputs({
   process.env["INPUT_PATH"] = path;
   process.env["INPUT_KEY"] = key;
   process.env["INPUT_RESTORE-KEYS"] = restoreKeys.join("\n");
+  process.env["INPUT_LOOKUP-ONLY"] = lookupOnly.toString();
+  process.env["INPUT_FAIL-ON-CACHE-MISS"] = failOnCacheMiss.toString();
   process.env["INPUT_BUCKET-NAME"] = bucketName;
   process.env["INPUT_AWS-REGION"] = awsRegion;
   process.env["INPUT_AWS-ACCESS-KEY-ID"] = awsAccessKeyId;
@@ -84,7 +92,7 @@ export function addCleanupFiles(...files: string[]): void {
   cleanupFiles.push(...files);
 }
 
-export function createReadStream(file: string): SdkStream<Readable> {
+export function createReadStream(file: string): SdkStream<Readable | ReadableStream | Blob> {
   return sdkStreamMixin(fs.createReadStream(file));
 }
 
