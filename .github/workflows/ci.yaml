@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           token: ${{ secrets.DEPENDABOT_TOKEN || secrets.GITHUB_TOKEN }}
@@ -78,7 +78,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Create test files
         run: |
           mkdir test-dir
@@ -119,7 +119,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Login AWS
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -156,7 +156,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Login AWS
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -194,7 +194,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Login AWS
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -226,7 +226,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Create test files
         run: |
           for i in {1..3}; do
@@ -254,7 +254,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Test action
         id: cache
         uses: ./restore
@@ -284,7 +284,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Test action
         id: cache
         uses: ./restore
@@ -316,7 +316,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
