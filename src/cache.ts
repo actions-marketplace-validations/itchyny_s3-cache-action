@@ -1,12 +1,12 @@
+import * as crypto from "node:crypto";
+import * as fs from "node:fs";
 import * as core from "@actions/core";
 import * as glob from "@actions/glob";
-import * as s3 from "@aws-sdk/client-s3";
-import * as crypto from "crypto";
-import * as fs from "fs";
+import type * as s3 from "@aws-sdk/client-s3";
 import * as tar from "tar";
 import * as tmp from "tmp";
 
-import { Client } from "./client";
+import { Client } from "./client.js";
 
 /**
  * Save cache to Amazon S3.
